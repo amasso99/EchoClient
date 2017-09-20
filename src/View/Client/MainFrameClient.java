@@ -14,7 +14,7 @@ public class MainFrameClient extends JFrame {
     // Referenzen
     private MainControllerClient mainController;
 
-    private JPanel interactionPanel;
+    private InteractionPanelHandlerClient interactionPanel;
 
     /**
      * Konstruktor
@@ -27,9 +27,9 @@ public class MainFrameClient extends JFrame {
     public MainFrameClient(MainControllerClient mainController, String name, int x, int y, int width, int height) {
         this.mainController = mainController;
 
-        this.interactionPanel = new InteractionPanelHandlerClient(mainController).getPanel();
+        this.interactionPanel = new InteractionPanelHandlerClient(mainController);
 
-        this.getContentPane().add(interactionPanel);
+        this.getContentPane().add(interactionPanel.getPanel());
 
         this.setLocation(x,y);
         this.setSize(width,height);

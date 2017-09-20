@@ -14,7 +14,7 @@ public class InteractionPanelHandlerServer {
     private MainControllerServer mainController;
 
     private JTextField port;
-    private JButton butonOpen;
+    private JButton buttonOpen;
     private JButton buttonClose;
     private JTextField message;
     private JTextArea syslog;
@@ -23,6 +23,7 @@ public class InteractionPanelHandlerServer {
 
     public InteractionPanelHandlerServer(MainControllerServer mainController) {
         this.mainController = mainController;
+        mainController.setPanel(this);
 
         port.setText("1025");
         message.setText("Ok!");
@@ -31,10 +32,11 @@ public class InteractionPanelHandlerServer {
     }
 
     private void createButtons(){
-        butonOpen.addActionListener(new ActionListener() {
+        buttonOpen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO Verhalten bei Knopfdruck implementieren!
+                mainController.createServer(Integer.parseInt(port.getText()));
             }
         });
         buttonClose.addActionListener(new ActionListener() {
@@ -50,10 +52,14 @@ public class InteractionPanelHandlerServer {
     }
 
     public void addToSyslog(String text){
-        if(syslog.getText().isEmpty()){
-            syslog.setText(text);
+        addToTextArea(text,syslog);
+    }
+
+    public void addToTextArea(String text,JTextArea area){
+        if(area.getText().isEmpty()){
+            area.setText(text);
         }else{
-            syslog.setText(syslog.getText() + "\n" + text);
+            area.setText(area.getText() + "\n" + text);
         }
     }
 }

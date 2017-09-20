@@ -16,7 +16,7 @@ public class MainFrameServer extends JFrame {
     // Referenzen
     private MainControllerServer mainController;
 
-    private JPanel interactionPanel;
+    private InteractionPanelHandlerServer interactionPanel;
 
     /**
      * Konstruktor
@@ -29,9 +29,9 @@ public class MainFrameServer extends JFrame {
     public MainFrameServer(MainControllerServer mainController, String name, int x, int y, int width, int height) {
         this.mainController = mainController;
 
-        this.interactionPanel = new InteractionPanelHandlerServer(mainController).getPanel();
+        this.interactionPanel = new InteractionPanelHandlerServer(mainController);
 
-        this.getContentPane().add(interactionPanel);
+        this.getContentPane().add(interactionPanel.getPanel());
 
         this.setLocation(x,y);
         this.setSize(width,height);

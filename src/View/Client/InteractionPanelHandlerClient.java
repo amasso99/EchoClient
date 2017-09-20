@@ -22,11 +22,12 @@ public class InteractionPanelHandlerClient {
 
     public InteractionPanelHandlerClient(MainControllerClient mainController) {
         this.mainController = mainController;
+        mainController.setPanel(this);
         createButtons();
 
-        serverIP.setText("172.168.3.22");
+        serverIP.setText("127.0.0.1");
         serverPort.setText("1025");
-        message.setText("Nachricht, die gespiegelt werden soll.");
+        message.setText("Oussama und Jan");
 
         addToOutput("Willkommen beim Echo-Client.");
         addToOutput("Tragen Sie eine IP-Adresse eines Echo-Servers samt passenden Port oben ein. Die Nachricht können Sie überarbeiten.");
@@ -40,12 +41,23 @@ public class InteractionPanelHandlerClient {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO Verhalten bei Knopfdruck implementieren! Beachte: Bei erfolgreicher Verbindung müssen die anderen Knöpfe dargestellt werden.
+                if(mainController.createClient(serverIP.getText(),Integer.parseInt(serverPort.getText()))) {
+                    buttonDisconnect.setVisible(true);
+                    buttonSend.setVisible(true);
+                    buttonConnect.setEnabled(false);
+                }
             }
         });
         buttonDisconnect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO Verhalten bei Knopfdruck implementieren! Beachte: Nach dem Abmelden sollte nur der "Verbinden"-Knopf dargestellt werden.
+
+
+                mainController.disconnect();
+                buttonDisconnect.setVisible(false);
+                buttonSend.setVisible(false);
+                buttonConnect.setEnabled(true);
             }
         });
         buttonDisconnect.setVisible(false);
@@ -54,6 +66,7 @@ public class InteractionPanelHandlerClient {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO Verhalten bei Knopfdruck implementieren!
+                mainController.send(message.getText());
             }
         });
         buttonSend.setVisible(false);
