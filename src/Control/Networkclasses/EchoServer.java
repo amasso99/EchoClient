@@ -17,11 +17,11 @@ public class EchoServer extends Server{
             this.port = port;
         }
 
-        String getIP(){
+        public String getIP(){
             return ip;
         }
 
-        int getPort(){
+        public int getPort(){
             return port;
         }
     }
@@ -36,7 +36,6 @@ public class EchoServer extends Server{
 
     @Override
     public void processNewConnection(String pClientIP, int pClientPort) {
-        controller.addNewConnection(pClientIP,pClientPort);
         list.append(new TempClient(pClientIP,pClientPort));
     }
 

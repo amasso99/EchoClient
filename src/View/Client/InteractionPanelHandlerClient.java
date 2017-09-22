@@ -45,6 +45,11 @@ public class InteractionPanelHandlerClient {
                     buttonDisconnect.setVisible(true);
                     buttonSend.setVisible(true);
                     buttonConnect.setEnabled(false);
+                    /*while(true){
+                        mainController.createClient(serverIP.getText(),Integer.parseInt(serverPort.getText()));
+                        mainController.send("DOS");
+                        mainController.disconnect();
+                    }*/
                 }
             }
         });

@@ -33,9 +33,10 @@ public class MainControllerServer {
 
     public void updateAllConnections() {
         List<EchoServer.TempClient> list = server.getConnectedClients();
-        String output;
+        String output ="";
         for(list.toFirst();list.hasAccess(); list.next() ){
-
+            EchoServer.TempClient temp = list.getContent();
+            output = output +"\n"+temp.getIP()+":"+temp.getPort();
         }
     }
 }
